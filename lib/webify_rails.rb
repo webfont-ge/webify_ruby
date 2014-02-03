@@ -1,5 +1,6 @@
 require 'webify_rails/version'
 require 'webify_rails/convert'
+require 'webify_rails/railtie' if defined?(Rails)
 
 module WebifyRails
   def self.logger=(log)
