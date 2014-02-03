@@ -16,6 +16,8 @@ end
 
 Bundler::GemHelper.install_tasks
 
+require 'webify_rails/tasks.rb'
+WebifyRails::load_tasks
 
 require 'rake/testtask'
 
