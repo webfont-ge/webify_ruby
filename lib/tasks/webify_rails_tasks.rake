@@ -1,4 +1,6 @@
-# desc "Explaining what the task does"
-# task :webify_rails do
-#   # Task goes here
-# end
+namespace :webify do
+  desc 'Shows a WebifyRails gem version'
+  task :current_version do
+    puts "You are running WebifyRails v.#{WebifyRails::VERSION} so far."
+  end
+end
