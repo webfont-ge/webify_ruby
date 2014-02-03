@@ -19,8 +19,8 @@ https://github.com/dachi-gh/webify
 
 == Gem Author
 
-Dachi Natsvlishvili <mailto:dnatsvlishvili@gmail.com>
+Dachi Natsvlishvili mailto:dnatsvlishvili@gmail.com
 
 == Licence
 
-https://github.com/dachi-gh/webify/blob/master/MIT-LICENSE
+https://github.com/dachi-gh/webify_rails/blob/master/MIT-LICENSE
