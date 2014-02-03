@@ -1,0 +1,26 @@
+= WebifyRails - Haskell Webify bindings gem for Rails 4 Applications
+
+= UNDER DEVELOPMENT
+
+== Usage
+
+==== Option #1: Install executables depending on your system
+
+You can find compiled executables for Linux 32, Linux 64, Mac OS X 64, Win 32 here
+  
+https://github.com/dachi-gh/webify/tree/executables
+
+==== Option #2: Compile Haskell application for your desired OS from here
+
+https://github.com/dachi-gh/webify
+
+==== Add to your Gemfile
+ gem 'webify_rails', :git => 'git://github.com/dachi-gh/webify_rails.git'
+
+== Gem Author
+
+Dachi Natsvlishvili <mailto:dnatsvlishvili@gmail.com>
+
+== Licence
+
+https://github.com/dachi-gh/webify/blob/master/MIT-LICENSE
