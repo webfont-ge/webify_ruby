@@ -1,4 +1,4 @@
-require 'FileUtils'
+require 'fileutils'
 require 'open3'
 
 module WebifyRails
@@ -24,22 +24,23 @@ module WebifyRails
 
       process
 
-      #if not created_any?
-      #  WebifyRails.logger.warn "Host did not create any files\n@command\n#{@command}\n@output\n#{@output}\n"
-      #  raise Error, "No were created:\n#{@output}"
-      #end
+      if affected_files.to_a.length == 0
+        WebifyRails.logger.info "Host did not create any files\n@command\n#{@command}\n@output\n#{@output}\n"
+      end
+    end
+
+    def affected_files
+      Dir[@result_dir + '/*.{ttf,eot,woff,svg}'].reject { |f| f[@file] }
+    end
+
+    def is_valid?
+      false if not @output.include? 'Generating' or @output.include? 'Failed'
+      true
     end
 
     protected
 
-    def is_valid? (output)
-      false if not output.include? 'Generating' or output.include? 'Failed'
-      true
-    end
-    #
-    #def created_any?
-    #  true
-    #end
+    private
 
     def destination_dir
       if @desired_dir.nil?
@@ -53,15 +54,11 @@ module WebifyRails
       end
     end
 
-    private
-
     def process
       @command = "#{WebifyRails.webify_binary} #{Shellwords.escape(@file)}"
       @output = Open3.popen3(@command) { |stdin, stdout, stderr| stdout.read }
 
-      Shellwords.escape(@output).split("'\n'").select{|s| s.match('font')}.join().split('Generating\\ ')[1..-1]
-
-      if not is_valid? @output
+      if not is_valid?
         WebifyRails.logger.fatal "Invalid input received\n@command\n#{@command}\n@output\n#{@output}\n"
         raise Error, "Binary responded with failure:\n#{@output}"
       end
@@ -69,8 +66,7 @@ module WebifyRails
       @generated = Shellwords.escape(@output).split("'\n'").select{|s| s.match('Generating')}.join().split('Generating\\ ')[1..-1]
 
       if @generated.to_a.empty?
-        WebifyRails.logger.fatal "No file output received\n@command\n#{@command}\n@output\n#{@output}\n"
-        raise Error, "No file output received:\n#{@output}"
+        WebifyRails.logger.info "No file output received\n@command\n#{@command}\n@output\n#{@output}\n"
       end
     end
   end
