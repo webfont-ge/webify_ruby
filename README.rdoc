@@ -1,4 +1,4 @@
-= WebifyRails - Haskell Webify bindings gem for Rails 4 Applications
+= WebifyRails - Haskell Webify bindings gem for Rails Applications
 
 = UNDER DEVELOPMENT
 
