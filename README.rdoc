@@ -21,6 +21,12 @@ https://github.com/dachi-gh/webify
 
 Dachi Natsvlishvili mailto:dnatsvlishvili@gmail.com
 
+== Todo
+
+1. Add support for Kerning option
+2. Add support for desired output files
+3. Add a bridge in Rails models
+
 == Licence
 
 https://github.com/dachi-gh/webify_rails/blob/master/MIT-LICENSE
