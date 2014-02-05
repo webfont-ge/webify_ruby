@@ -9,6 +9,9 @@ require 'webify_rails/tasks'
 require 'webify_rails/railtie' if defined?(Rails)
 
 module WebifyRails
+
+  EXT = %w(.ttf .otf)
+
   def self.logger=(log)
     @logger = log
   end

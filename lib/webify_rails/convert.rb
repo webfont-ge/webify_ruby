@@ -13,6 +13,8 @@ module WebifyRails
       raise Errno::ENOENT, "The font file '#{file}' does not exist" unless File.exists?(file)
       @original_file = file
 
+      raise Error, "The font file '#{file}' is not valid" unless WebifyRails::EXT.include? File.extname(@original_file)
+
       @original_dir = File.dirname(@original_file)
       raise Errno::ENOENT, "Can't find directory '#{@original_dir}'" unless File.directory? @original_dir
 
