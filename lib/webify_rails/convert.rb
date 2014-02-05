@@ -3,12 +3,13 @@ require 'open3'
 
 module WebifyRails
   class Convert
-    attr_reader :file, :original_file, :command, :output, :generated, :original_dir, :result_dir, :desired_dir
+    attr_reader :file, :original_file, :command, :output, :generated, :original_dir, :result_dir, :desired_dir, :css
 
-    def initialize(file, dir: nil)
+    def initialize(file, dir: nil, css: nil)
       [file, dir]
 
       @desired_dir = dir
+      @css = css
 
       raise Errno::ENOENT, "The font file '#{file}' does not exist" unless File.exists?(file)
       @original_file = file
@@ -28,6 +29,11 @@ module WebifyRails
 
       if affected_files.to_a.length == 0
         WebifyRails.logger.info "Host did not create any files\n@command\n#{@command}\n@output\n#{@output}\n"
+      end
+
+      unless @css.nil?
+        needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
+        @css = WebifyRails::Css.new(File.basename(@original_file, ".*"), File.basename(@original_file, ".*"), *needs).result
       end
     end
 
