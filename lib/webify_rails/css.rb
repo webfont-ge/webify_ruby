@@ -21,7 +21,7 @@ module WebifyRails
       define_method('has_' + ext) { @has.include? ext.to_sym }
     end
 
-    def initialize(name, file, has)
+    def initialize(name, file, *has)
       [name, file, has]
 
       @has = has
