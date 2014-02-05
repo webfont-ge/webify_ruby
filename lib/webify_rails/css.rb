@@ -35,11 +35,9 @@ module WebifyRails
 
     def make_css
       template = ERB.new TEMPLATE
-      result = template.result(binding)
+      result = template.result binding
       (0..3).each { result.gsub!(/\n;\n/m, ";\n") }
       @result = result.gsub /^$\n/, ''
     end
   end
-
-  puts Css.new('test', 'file', [:woff, :ttf]).result
 end
