@@ -23,11 +23,10 @@ Dachi Natsvlishvili mailto:dnatsvlishvili@gmail.com
 
 == Todo
 
-1. Add CSS generation support
-2. Add support for Kerning option
-3. Add support for desired output files
-4. Add a Rails DSL
-5. Add a bridge in Rails models
+1. Add support for Kerning option
+2. Add support for desired output files
+3. Add a Rails DSL
+4. Add a bridge in Rails models
 
 == Licence
 
