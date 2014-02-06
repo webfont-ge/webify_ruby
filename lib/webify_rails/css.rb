@@ -6,24 +6,24 @@ module WebifyRails
   TEMPLATE = <<-CSS.gsub /^\s*/, ''
   @font-face {
     font-family: '<%= @name %>';
-    <% if has_eot %>src: url('<%= @file %>.eot'); <% end %>
-    <% if has_eot %>src: url('<%= @file %>.eot?#iefix') format('embedded-opentype')<%if has_ttf or has_woff or has_svg %>,<%end%><%else%>src:<% end %>
-        <% if has_svg %>     url('<%= @file %>.svg#<%= @name %>') format('svg')<%if has_ttf or has_woff %>,<%end%><% end %>
-        <% if has_woff %>     url('<%= @file %>.woff') format('woff')<%if has_ttf%>,<%end%><% end %>
-        <% if has_ttf %>     url('<%= @file %>.ttf') format('truetype')<% end %>;
+    <% if has_eot %>src: url('<%= @url %>.eot'); <% end %>
+    <% if has_eot %>src: url('<%= @url %>.eot?#iefix') format('embedded-opentype')<%if has_ttf or has_woff or has_svg %>,<%end%><%else%>src:<% end %>
+        <% if has_svg %>     url('<%= @url %>.svg#<%= @name %>') format('svg')<%if has_ttf or has_woff %>,<%end%><% end %>
+        <% if has_woff %>     url('<%= @url %>.woff') format('woff')<%if has_ttf%>,<%end%><% end %>
+        <% if has_ttf %>     url('<%= @url %>.ttf') format('truetype')<% end %>;
     font-weight: normal;
     font-style: normal;
   }
   CSS
 
   class Css
-    attr_reader :result, :filename, :file, :dir, :css_file, :output
+    attr_reader :result, :filename, :url, :dir, :css_file, :output
 
     %w(eot svg woff ttf).each do |ext|
       define_method('has_' + ext) { @has.include? ext.to_sym }
     end
 
-    class << self;attr_accessor :path_before, :link_to;end
+    class << self;attr_accessor :relative_from, :link_to;end
 
     def initialize(name, file, *has)
       [name, file, has]
@@ -33,9 +33,9 @@ module WebifyRails
 
       @filename = File.basename(file, '.*')
 
-      @file = (self.class.path_before.nil? ?
+      @url = (self.class.relative_from.nil? ?
           (self.class.link_to ? (self.class.link_to + '/' + File.basename(file)) : file)
-      : Pathname.new(file).relative_path_from(Pathname.new(self.class.path_before))).to_s[/.*(?=\..+$)/]
+      : Pathname.new(file).relative_path_from(Pathname.new(self.class.relative_from))).to_s[/.*(?=\..+$)/]
 
       make_css
     end

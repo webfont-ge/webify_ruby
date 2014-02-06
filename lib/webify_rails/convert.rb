@@ -47,15 +47,22 @@ module WebifyRails
     def generate_css
       needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
 
-      WebifyRails::Css.path_before = @link_to ? nil : @css
-      WebifyRails::Css.link_to = @link_to
+      if should_write_css?
+        WebifyRails::Css.relative_from = @link_to ? nil : @css
+        WebifyRails::Css.link_to = @link_to
+      end
 
       css = WebifyRails::Css.new(File.basename(@file, ".*"), @file, *needs)
       @styles = css.result
-      css.write @css if @css.respond_to?(:to_str) and not @css.to_s.empty?
+
+      css.write @css if should_write_css?
     end
 
     protected
+
+    def should_write_css?
+      @css.respond_to?(:to_str) and not @css.to_s.empty?
+    end
 
     private
 
