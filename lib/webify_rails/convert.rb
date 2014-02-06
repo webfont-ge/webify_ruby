@@ -3,13 +3,14 @@ require 'open3'
 
 module WebifyRails
   class Convert
-    attr_reader :file, :original_file, :command, :output, :generated, :original_dir, :result_dir, :desired_dir, :css, :styles
+    attr_reader :file, :original_file, :command, :output, :generated, :original_dir, :result_dir, :desired_dir, :css, :link_to, :styles
 
-    def initialize(file, dir: nil, css: nil)
+    def initialize(file, dir: nil, css: nil, link_to: nil)
       [file, dir]
 
       @desired_dir = dir
       @css = css
+      @link_to = link_to
 
       raise Errno::ENOENT, "The font file '#{file}' does not exist" unless File.exists?(file)
       @original_file = file
@@ -33,7 +34,10 @@ module WebifyRails
 
       unless @css.nil?
         needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
-        css = WebifyRails::Css.new(File.basename(@original_file, ".*"), File.basename(@original_file, ".*"), *needs)
+
+        WebifyRails::Css.path_before = @link_to ? nil : @css
+
+        css = WebifyRails::Css.new(File.basename(@file, ".*"), @file, @link_to, *needs)
         @styles = css.result
         css.write @css if @css.respond_to?(:to_str) and not @css.to_s.empty?
       end
