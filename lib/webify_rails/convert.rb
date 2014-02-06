@@ -32,15 +32,7 @@ module WebifyRails
         WebifyRails.logger.info "Host did not create any files\n@command\n#{@command}\n@output\n#{@output}\n"
       end
 
-      unless @css.nil?
-        needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
-
-        WebifyRails::Css.path_before = @link_to ? nil : @css
-
-        css = WebifyRails::Css.new(File.basename(@file, ".*"), @file, @link_to, *needs)
-        @styles = css.result
-        css.write @css if @css.respond_to?(:to_str) and not @css.to_s.empty?
-      end
+      generate_css unless @css.nil?
     end
 
     def affected_files
@@ -50,6 +42,17 @@ module WebifyRails
     def is_valid?
       false if not @output.include? 'Generating' or @output.include? 'Failed'
       true
+    end
+
+    def generate_css
+      needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
+
+      WebifyRails::Css.path_before = @link_to ? nil : @css
+      WebifyRails::Css.link_to = @link_to
+
+      css = WebifyRails::Css.new(File.basename(@file, ".*"), @file, *needs)
+      @styles = css.result
+      css.write @css if @css.respond_to?(:to_str) and not @css.to_s.empty?
     end
 
     protected

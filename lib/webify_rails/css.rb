@@ -23,9 +23,9 @@ module WebifyRails
       define_method('has_' + ext) { @has.include? ext.to_sym }
     end
 
-    class << self;attr_accessor :path_before;end
+    class << self;attr_accessor :path_before, :link_to;end
 
-    def initialize(name, file, link_to, *has)
+    def initialize(name, file, *has)
       [name, file, has]
 
       @has = has
@@ -34,7 +34,7 @@ module WebifyRails
       @filename = File.basename(file, '.*')
 
       @file = (self.class.path_before.nil? ?
-          (link_to ? (link_to + '/' + File.basename(file)) : file)
+          (self.class.link_to ? (self.class.link_to + '/' + File.basename(file)) : file)
       : Pathname.new(file).relative_path_from(Pathname.new(self.class.path_before))).to_s[/.*(?=\..+$)/]
 
       make_css
