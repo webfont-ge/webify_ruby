@@ -1,4 +1,5 @@
 require 'erb'
+require 'fileutils'
 
 module WebifyRails
   TEMPLATE = <<-CSS.gsub /^\s*/, ''
@@ -15,7 +16,7 @@ module WebifyRails
   CSS
 
   class Css
-    attr_reader :result
+    attr_reader :result, :dir, :css_file, :output
 
     %w(eot svg woff ttf).each do |ext|
       define_method('has_' + ext) { @has.include? ext.to_sym }
@@ -31,7 +32,12 @@ module WebifyRails
       make_css
     end
 
-    def write(file)
+    def write(dir)
+      @dir = FileUtils.mkdir_p dir
+      @css_file = File.join(@dir, @file + '.css')
+
+      File.delete(@css_file) if File.exist?(@css_file)
+      @output = File.open(@css_file, 'w') { |file| file.write(@result) }
     end
 
     private
