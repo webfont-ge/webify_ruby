@@ -31,6 +31,9 @@ module WebifyRails
       make_css
     end
 
+    def write(file)
+    end
+
     private
 
     def make_css

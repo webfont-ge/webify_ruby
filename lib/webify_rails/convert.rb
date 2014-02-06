@@ -3,7 +3,7 @@ require 'open3'
 
 module WebifyRails
   class Convert
-    attr_reader :file, :original_file, :command, :output, :generated, :original_dir, :result_dir, :desired_dir, :css
+    attr_reader :file, :original_file, :command, :output, :generated, :original_dir, :result_dir, :desired_dir, :css, :styles
 
     def initialize(file, dir: nil, css: nil)
       [file, dir]
@@ -33,7 +33,9 @@ module WebifyRails
 
       unless @css.nil?
         needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
-        @css = WebifyRails::Css.new(File.basename(@original_file, ".*"), File.basename(@original_file, ".*"), *needs).result
+        css = WebifyRails::Css.new(File.basename(@original_file, ".*"), File.basename(@original_file, ".*"), *needs)
+        @styles = css.result
+        css.write @css if @css.respond_to?(:to_str) and not @css.to_s.empty?
       end
     end
 
