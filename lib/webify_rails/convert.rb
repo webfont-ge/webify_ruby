@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'open3'
 require 'tmpdir'
+require 'shellwords'
 
 module WebifyRails
   class Convert
