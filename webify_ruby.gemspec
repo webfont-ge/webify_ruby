@@ -1,6 +1,5 @@
 $:.push File.expand_path("../lib", __FILE__)
 
-#update me
 require "webify_ruby/version"
 
 Gem::Specification.new do |s|
@@ -15,7 +14,6 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  #s.add_dependency "rails", "~> 4.0.1"
-
+  s.add_development_dependency "rails", "~> 4.0.1"
   s.add_development_dependency "sqlite3"
 end
