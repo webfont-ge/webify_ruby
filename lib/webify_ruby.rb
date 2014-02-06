@@ -2,14 +2,14 @@ $:.unshift File.dirname(__FILE__)
 
 require 'logger'
 
-require 'webify_rails/version'
-require 'webify_rails/errors'
-require 'webify_rails/convert'
-require 'webify_rails/css'
-require 'webify_rails/tasks'
-require 'webify_rails/railtie' if defined?(Rails)
+require 'webify_ruby/version'
+require 'webify_ruby/errors'
+require 'webify_ruby/convert'
+require 'webify_ruby/css'
+require 'webify_ruby/tasks'
+require 'webify_ruby/railtie' if defined?(Rails)
 
-module WebifyRails
+module WebifyRuby
 
   EXT = %w(.ttf .otf)
 

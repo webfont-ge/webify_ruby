@@ -1,3 +1,3 @@
-module WebifyRails
+module WebifyRuby
   class Error < StandardError;end
 end

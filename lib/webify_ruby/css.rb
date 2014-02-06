@@ -2,7 +2,7 @@ require 'erb'
 require 'fileutils'
 require 'pathname'
 
-module WebifyRails
+module WebifyRuby
   TEMPLATE = <<-CSS.gsub /^\s*/, ''
   @font-face {
     font-family: '<%= @name %>';

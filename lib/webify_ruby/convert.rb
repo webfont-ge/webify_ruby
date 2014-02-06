@@ -3,7 +3,7 @@ require 'open3'
 require 'tmpdir'
 require 'shellwords'
 
-module WebifyRails
+module WebifyRuby
   class Convert
     attr_reader :file, :original_file, :command, :output, :generated, :original_dir, :result_dir, :desired_dir, :css, :link_to, :styles
 
@@ -17,7 +17,7 @@ module WebifyRails
       raise Errno::ENOENT, "The font file '#{file}' does not exist" unless File.exists?(file)
       @original_file = file
 
-      raise Error, "The font file '#{file}' is not valid" unless WebifyRails::EXT.include? File.extname(@original_file)
+      raise Error, "The font file '#{file}' is not valid" unless WebifyRuby::EXT.include? File.extname(@original_file)
 
       @original_dir = File.dirname(@original_file)
       raise Errno::ENOENT, "Can't find directory '#{@original_dir}'" unless File.directory? @original_dir
@@ -31,7 +31,7 @@ module WebifyRails
       process
 
       if affected_files.to_a.length == 0
-        WebifyRails.logger.info "Host did not create any files\n@command\n#{@command}\n@output\n#{@output}\n"
+        WebifyRuby.logger.info "Host did not create any files\n@command\n#{@command}\n@output\n#{@output}\n"
       end
 
       generate_css unless @css.nil?
@@ -50,11 +50,11 @@ module WebifyRails
       needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
 
       if should_write_css?
-        WebifyRails::Css.relative_from = @link_to ? nil : @css
-        WebifyRails::Css.link_to = @link_to
+        WebifyRuby::Css.relative_from = @link_to ? nil : @css
+        WebifyRuby::Css.link_to = @link_to
       end
 
-      css = WebifyRails::Css.new(File.basename(@file, ".*"), @file, *needs)
+      css = WebifyRuby::Css.new(File.basename(@file, ".*"), @file, *needs)
       @styles = css.result
 
       css.write @css if should_write_css?
@@ -81,18 +81,18 @@ module WebifyRails
     end
 
     def process
-      @command = "#{WebifyRails.webify_binary} #{Shellwords.escape(@file)}"
+      @command = "#{WebifyRuby.webify_binary} #{Shellwords.escape(@file)}"
       @output = Open3.popen3(@command) { |stdin, stdout, stderr| stdout.read }
 
       if not is_valid?
-        WebifyRails.logger.fatal "Invalid input received\n@command\n#{@command}\n@output\n#{@output}\n"
+        WebifyRuby.logger.fatal "Invalid input received\n@command\n#{@command}\n@output\n#{@output}\n"
         raise Error, "Binary responded with failure:\n#{@output}"
       end
 
       @generated = Shellwords.escape(@output).split("'\n'").select{|s| s.match('Generating')}.join().split('Generating\\ ')[1..-1]
 
       if @generated.to_a.empty?
-        WebifyRails.logger.info "No file output received\n@command\n#{@command}\n@output\n#{@output}\n"
+        WebifyRuby.logger.info "No file output received\n@command\n#{@command}\n@output\n#{@output}\n"
       end
     end
   end

@@ -1,4 +1,4 @@
-= WebifyRails - Haskell Webify bindings gem for Rails Applications
+= WebifyRuby - Haskell Webify bindings gem for Ruby and Rails Applications
 
 = UNDER DEVELOPMENT
 
@@ -15,7 +15,7 @@ https://github.com/dachi-gh/webify/tree/executables
 https://github.com/dachi-gh/webify
 
 ==== Add to your Gemfile
- gem 'webify_rails', :git => 'git://github.com/dachi-gh/webify_rails.git'
+ gem 'webify_ruby', :git => 'git://github.com/dachi-gh/webify_ruby.git'
 
 == Gem Author
 
@@ -30,4 +30,4 @@ Dachi Natsvlishvili mailto:dnatsvlishvili@gmail.com
 
 == Licence
 
-https://github.com/dachi-gh/webify_rails/blob/master/MIT-LICENSE
+https://github.com/dachi-gh/webify_ruby/blob/master/MIT-LICENSE
