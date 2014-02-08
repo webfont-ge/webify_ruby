@@ -25,8 +25,7 @@ Dachi Natsvlishvili mailto:dnatsvlishvili@gmail.com
 
 1. Add support for Kerning option
 2. Add support for desired output files
-3. Add a Rails DSL
-4. Add a bridge in Rails models
+3. Communicate with Rails
 
 == Licence
 
