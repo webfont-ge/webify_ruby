@@ -15,23 +15,23 @@ module WebifyRuby
     attr_reader :file
     # Internal: Returns the String inputted file.
     attr_reader :original_file
-    # Public: Returns the String command that was executed
+    # Public: Returns the String command that was executed.
     attr_reader :command
-    # Public: Returns the String STDOUT from the binary
+    # Public: Returns the String STDOUT from the binary.
     attr_reader :output
-    # Public: Returns the Array of created files
+    # Public: Returns the Array of created files.
     attr_reader :generated
-    # Internal: Returns the String directory path of file inputted
+    # Internal: Returns the String directory path of file inputted.
     attr_reader :original_dir
-    # Public: Returns the String directory path of the destination
+    # Public: Returns the String directory path of the destination.
     attr_reader :result_dir
-    # Internal: Returns the String directory path of the custom directory
+    # Internal: Returns the String directory path of the custom directory.
     attr_reader :desired_dir
-    # Internal: Returns the String or Mixed value of desired CSS behavior
+    # Internal: Returns the String or Mixed value of desired CSS behavior.
     attr_reader :css
-    # Internal: Returns the String path of CSS url prefix
+    # Internal: Returns the String path of CSS url prefix.
     attr_reader :link_to
-    # Public: Returns the String CSS stylesheet code if possible
+    # Public: Returns the String CSS stylesheet code if possible.
     attr_reader :styles
 
     # Public: Initialize a Convertion of font-file.
@@ -149,7 +149,7 @@ module WebifyRuby
     # supplied arguments.
     #
     # Returns the Array of files that were generated
-    # Raises Error if a binary fails to respond positively to our input
+    # Raises Error if a binary fails to respond positively to our input.
     def process
       @command = "#{WebifyRuby.webify_binary} #{Shellwords.escape(@file)}"
       @output = Open3.popen3(@command) { |stdin, stdout, stderr| stdout.read }
