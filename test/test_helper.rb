@@ -1,6 +1,8 @@
 require 'simplecov'
 SimpleCov.start
 
+require 'coveralls'
+Coveralls.wear!
 
 ENV["RAILS_ENV"] = "test"
 
