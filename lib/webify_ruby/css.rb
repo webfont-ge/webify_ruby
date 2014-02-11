@@ -2,7 +2,6 @@ require 'erb'
 require 'fileutils'
 require 'pathname'
 
-
 module WebifyRuby
   # Internal: Template which is according to what a CSS Styles
   # will be generated. This might change in future versions,
