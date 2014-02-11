@@ -1,5 +1,8 @@
 require 'test_helper'
 
+WebifyRuby::webify_binary = 'bin/webify-travis'
+exec 'chmod a+x '+WebifyRuby::webify_binary
+
 class WebifyRubyTest < ActiveSupport::TestCase
   test "truth" do
     assert_kind_of Module, WebifyRuby

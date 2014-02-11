@@ -1,8 +1,7 @@
 require 'test_helper'
 require 'fileutils'
 
-WebifyRuby::webify_binary = 'bin/webify-travis'
-exec 'chmod a+x '+WebifyRuby::webify_binary
+
 
 class WebifyRubyTest < ActiveSupport::TestCase
   ttf_convert_path = PATH+'/public/ttf_convert'
