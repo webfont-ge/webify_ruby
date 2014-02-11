@@ -8,6 +8,7 @@
 = WebifyRuby - Haskell Webify bindings gem for Ruby and Rails Applications
 
  Version 0.0.1 :: Lazi
+ Version 0.0.2 :: Gali
 
 == Usage
 
