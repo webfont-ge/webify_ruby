@@ -100,7 +100,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
+  bundler (~> 1.5.3)
   coveralls
   rails
   rake
