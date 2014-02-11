@@ -1,5 +1,4 @@
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$:.push File.expand_path("../lib", __FILE__)
 
 require "webify_ruby/version"
 
@@ -13,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = 'WebifyRuby communicates with Webify and provides nice and easy working interface'
   s.licenses    = ['MIT']
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc", "Gemfile", "webify_ruby.gemspec"]
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc", "Gemfile", "Gemfile.lock", "webify_ruby.gemspec"]
   s.test_files = Dir["test/**/*"]
 
   s.add_development_dependency 'bundler', '~> 1.4'
