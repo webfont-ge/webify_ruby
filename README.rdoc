@@ -1,6 +1,6 @@
 = WebifyRuby - Haskell Webify bindings gem for Ruby and Rails Applications
 
-= UNDER DEVELOPMENT
+ Version 0.0.1 :: Lazi
 
 == Usage
 
@@ -17,15 +17,143 @@ https://github.com/dachi-gh/webify
 ==== Add to your Gemfile
  gem 'webify_ruby', :git => 'git://github.com/dachi-gh/webify_ruby.git'
 
+You can require a library to use in your Ruby application
+  require 'webify_ruby'
+
+You don't have to do so if you're using rails as bundler can do it for you
+  Bundler.require(:default, Rails.env)
+
+==== Make a Rake task for a quick example
+
+  namespace :webify_ruby do
+    desc 'Convert a file and distribute'
+    task :convert, [:source, :dir_fonts, :dir_css] => :environment do |t, args|
+      pp WebifyRuby::Convert.new(
+        args.source,
+        dir: args.dir_fonts,
+        css: args.dir_css
+      )
+    end
+  end
+
+and run it as
+ $ rake webify_ruby:convert['my_fonts/sample.ttf','demo/convert','demo/css']
+
+If successful you should get find converted files under created directory demo/convert and stylesheet css file with relative links under demo/css directory
+
+== Explore
+
+==== Convert and place in the same directory
+Convert constructor requires one parameter at least, which is a ttf or otf file
+ WebifyRuby::Convert.new('fonts/font.ttf')
+
+This should normally generate svg, woff and eot and place all four fonts in the same directory without css
+
+==== Convert and place in desired directory
+
+Constructor can take a directory parameter
+  WebifyRuby::Convert.new('fonts/font.ttf', dir: 'webfonts')
+
+This example creates webfonts directory if necessary and puts four webfont files there
+
+==== Generate stylesheets along the fonts
+
+It is possible to pass a parameter to the class constructor, so it knows you want stylesheets too
+  WebifyRuby::Convert.new('fonts/my_font.ttf, css: 'stylesheets/fonts')
+
+Would create a stylesheets directory if necessary and place my_font.css with relative urls
+
+==== Generate stylesheet with custom urls
+
+There might be cases when you're working with subdomains for example and relative urls are not for you
+  WebifyRuby::Convert.new('fonts/my_font.ttf, css: 'stylesheets/custom', link_to: 'http://fonts.example.com')
+
+Writes a my_font.css file under stylesheets/custom directory with custom url prepended to filename, like this:
+
+  @font-face {
+  font-family: 'my_font';
+  src: url('http://fonts.example.com/my_font.eot'); 
+  src: url('http://fonts.example.com/my_font.eot?#iefix') format('embedded-opentype'),
+       url('http://fonts.example.com/my_font.svg#my_font') format('svg'),
+       url('http://fonts.example.com/my_font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  }
+
+==== Get stylesheet without creating files
+
+You might need a css styles to write to a file by yourself, in this case you need to look for returned values
+  convert = WebifyRuby::Convert.new('fonts/my_font.ttf, css: true, link_to: 'http://example.com/fonts')
+  puts convert.styles
+
+would result in
+
+  > puts convert.styles
+  @font-face {
+  font-family: 'my_font';
+  src: url('http://fonts.example.com/my_font.eot'); 
+  src: url('http://fonts.example.com/my_font.eot?#iefix') format('embedded-opentype'),
+       url('http://fonts.example.com/my_font.svg#my_font') format('svg'),
+       url('http://fonts.example.com/my_font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  }
+  => nil 
+
+So you can make use of generated styles according to your needs
+
+==== Values that you get after converting
+
+You might need to know about directory names or other information that library operates on. After initializing a Convert class, you get an object that should have everything you need. An example is here
+
+  2.1.0-preview1 :028 > convert = WebifyRuby::Convert.new('public/fonts/my_font.ttf',
+  dir:'my_dir_fonts',
+  css: 'my_dir_css',
+  link_to: 'http://example.com/my_dir_fonts')
+   => #<WebifyRuby::Convert:0x007fbc1af6fd00
+      @desired_dir="my_dir_fonts",
+      @css="my_dir_css",
+      @link_to="http://example.com/my_dir_fonts",
+      @original_file="public/fonts/my_font.ttf",
+      @original_dir="public/fonts",
+      @result_dir="my_dir_fonts/d20140211-56782-4cglvv",
+      @file="my_dir_fonts/d20140211-56782-4cglvv/my_font.ttf",
+      @command="webify my_dir_fonts/d20140211-56782-4cglvv/my_font.ttf",
+      @output="Generating my_dir_fonts/d20140211-56782-4cglvv/my_font.eot
+      Generating my_dir_fonts/d20140211-56782-4cglvv/my_font.woff
+      Generating my_dir_fonts/d20140211-56782-4cglvv/my_font.svg
+      Available cmaps
+      -----------------------------------------------------------------------------
+      PlatformId | EncodingId | Description                                        
+      0          | 3          | Unicode 2.0 and onwards semantics, Unicode BMP only
+      1          | 0          | Macintosh Roman 8-bit simple                       
+                 | 1          | Microsoft Unicode BMP (UCS-2)
+      -----------------------------------------------------------------------------
+      Selecting platformId 3 encodingId 1 -- Microsoft Unicode BMP (UCS-2)",
+      @generated=["my_dir_fonts/d20140211-56782-4cglvv/my_font.eot",
+      "my_dir_fonts/d20140211-56782-4cglvv/my_font.woff",
+      "my_dir_fonts/d20140211-56782-4cglvv/my_font.svg"],
+      @styles="@font-face {
+      font-family: 'my_font';
+      src: url('http://example.com/my_dir_fonts/my_font.eot');
+      src: url('http://example.com/my_dir_fonts/my_font.eot?#iefix') format('embedded-opentype'),
+           url('http://example.com/my_dir_fonts/my_font.svg#my_font') format('svg'),
+           url('http://example.com/my_dir_fonts/my_font.woff') format('woff');
+           font-weight: normal;\nfont-style: normal;
+      }">
+
+That way you can for example know a generated directory path by running
+  convert.result_dir
+
+
 == Gem Author
 
 Dachi Natsvlishvili mailto:dnatsvlishvili@gmail.com
 
 == Todo
 
-1. Add support for Kerning option
+1. Add support for kerning option
 2. Add support for desired output files
-3. Communicate with Rails
 
 == Licence
 
