@@ -23,7 +23,7 @@ https://github.com/dachi-gh/webify/tree/executables
 https://github.com/dachi-gh/webify
 
 ==== Add to your Gemfile
- gem 'webify_ruby', '~> 0.0.1'
+ gem 'webify_ruby', :git => 'git://github.com/dachi-gh/webify_ruby.git', :tag => 'v0.0.2'
 or git for development version
  gem 'webify_ruby', :git => 'git://github.com/dachi-gh/webify_ruby.git'
 
