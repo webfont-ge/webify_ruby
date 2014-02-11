@@ -154,7 +154,7 @@ That way you can for example know a generated directory path by running
 
 ==== webify_ruby-0.0.1-lazi
 
-If you have trouble launching WebifyRuby, please make sure you are requiring rack, first
+If you have trouble launching WebifyRuby, please make sure you are requiring rake, first
   2.1.0-preview1 :003 > require 'rake'
    => true 
   2.1.0-preview1 :004 > require 'webify_ruby'
