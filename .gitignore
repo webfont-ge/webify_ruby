@@ -9,4 +9,5 @@ test/webify_ruby_rails/tmp/
 test/webify_ruby_rails/tmp/
 test/webify_ruby_rails/public/otf_convert
 test/webify_ruby_rails/public/ttf_convert
+test/webify_ruby_rails/public/destination_directories_test
 test/webify_ruby_rails/.sass-cache
