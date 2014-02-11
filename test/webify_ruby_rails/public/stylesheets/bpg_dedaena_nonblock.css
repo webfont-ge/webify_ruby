@@ -1,9 +1,6 @@
 @font-face {
 font-family: 'bpg_dedaena_nonblock';
-src: url('../ttf_convert/d20140211-75402-8c8m39/bpg_dedaena_nonblock.eot'); 
-src: url('../ttf_convert/d20140211-75402-8c8m39/bpg_dedaena_nonblock.eot?#iefix') format('embedded-opentype'),
-     url('../ttf_convert/d20140211-75402-8c8m39/bpg_dedaena_nonblock.svg#bpg_dedaena_nonblock') format('svg'),
-     url('../ttf_convert/d20140211-75402-8c8m39/bpg_dedaena_nonblock.woff') format('woff');
+src:;
 font-weight: normal;
 font-style: normal;
 }

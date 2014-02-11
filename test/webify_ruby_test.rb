@@ -1,7 +1,7 @@
 require 'test_helper'
 
 WebifyRuby::webify_binary = 'bin/webify-travis'
-exec 'chmod a+x '+WebifyRuby::webify_binary
+`chmod a+x #{WebifyRuby::webify_binary}`
 
 class WebifyRubyTest < ActiveSupport::TestCase
   test "truth" do
