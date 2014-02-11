@@ -71,8 +71,11 @@ module WebifyRuby
 
       process
 
+      
       if affected_files.to_a.length == 0
+        # :nocov:
         WebifyRuby.logger.info "Host did not create any files\n@command\n#{@command}\n@output\n#{@output}\n"
+        # :nocov:
       end
 
       generate_css unless @css.nil?
@@ -150,6 +153,7 @@ module WebifyRuby
     #
     # Returns the Array of files that were generated
     # Raises Error if a binary fails to respond positively to our input.
+    # :nocov:
     def process
       @command = "#{WebifyRuby.webify_binary} #{Shellwords.escape(@file)}"
       @output = Open3.popen3(@command) { |stdin, stdout, stderr| stdout.read }
@@ -165,5 +169,6 @@ module WebifyRuby
         WebifyRuby.logger.info "No file output received\n@command\n#{@command}\n@output\n#{@output}\n"
       end
     end
+    # :nocov:
   end
 end

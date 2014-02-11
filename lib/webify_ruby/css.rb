@@ -97,10 +97,12 @@ module WebifyRuby
 
       @filename = File.basename(file, '.*')
 
+      # :nocov:
       @url = (self.class.relative_from.nil? ?
           (self.class.link_to ? (self.class.link_to + '/' + File.basename(file)) : file)
       : Pathname.new(file).relative_path_from(Pathname.new(self.class.relative_from))).to_s[/.*(?=\..+$)/]
-
+      # :nocov:
+      
       make_css
     end
 
