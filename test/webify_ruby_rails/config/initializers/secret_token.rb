@@ -1,0 +1,1 @@
+WebifyRubyRails::Application.config.secret_key_base = '0e0c7e424f36dda4c911aec7c6e46361fc6efe36a6efdbeeca59c63c8aa72e3d35a87ac2e1e9f555d0898b3a446fd6d6ab189c16cfa4664aa7590ca884eb3c29'

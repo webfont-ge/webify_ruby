@@ -1,8 +1,9 @@
 .bundle/
 log/*.log
 pkg/
-test/dummy/db/*.sqlite3
-test/dummy/db/*.sqlite3-journal
-test/dummy/log/*.log
-test/dummy/tmp/
-test/dummy/.sass-cache
+coverage/
+test/webify_ruby_rails/db/*.sqlite3
+test/webify_ruby_rails/db/*.sqlite3-journal
+test/webify_ruby_rails/log/*.log
+test/webify_ruby_rails/tmp/
+test/webify_ruby_rails/.sass-cache
