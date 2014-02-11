@@ -2,6 +2,9 @@
 {<img src="https://travis-ci.org/dachi-gh/webify_ruby.png?branch=master" alt="Build Status" />}[https://travis-ci.org/dachi-gh/webify_ruby]
 {<img src="https://gemnasium.com/dachi-gh/webify_ruby.png" alt="Dependency Status" />}[https://gemnasium.com/dachi-gh/webify_ruby]
 {<img src="https://badge.fury.io/rb/webify_ruby.png" alt="Gem Version" />}[http://badge.fury.io/rb/webify_ruby]
+{<img src="https://khancdn.eu/badges.php?key=codename&value=lazi&color=blue" height="18" alt="Gem Version" />}[https://github.com/dachi-gh/webify_ruby/releases/tag/v0.0.1]
+
+
 = WebifyRuby - Haskell Webify bindings gem for Ruby and Rails Applications
 
  Version 0.0.1 :: Lazi
