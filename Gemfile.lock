@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    webify_ruby (0.0.1)
+    webify_ruby (0.0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -100,10 +100,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.5.3)
-  coveralls
-  rails
-  rake
-  simplecov
-  sqlite3
+  bundler (~> 1.4)
+  coveralls (~> 0.7)
+  rails (~> 4.0)
+  rake (~> 10.1)
+  simplecov (~> 0.7)
+  sqlite3 (~> 1.3)
   webify_ruby!
