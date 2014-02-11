@@ -21,7 +21,7 @@ class WebifyRubyTest < ActiveSupport::TestCase
   end
   
   test "Get webify binary" do
-    assert_equal('webify', WebifyRuby::webify_binary)
+    assert_equal('bin/webify-travis', WebifyRuby::webify_binary)
   end
   
   test "Set webify binary" do
