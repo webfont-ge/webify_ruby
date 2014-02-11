@@ -1,3 +1,4 @@
+require 'rake'
 require 'webify_ruby/version'
 
 namespace :webify_ruby do
