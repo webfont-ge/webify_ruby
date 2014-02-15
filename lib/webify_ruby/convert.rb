@@ -49,7 +49,7 @@ module WebifyRuby
     # Raises Error if the inputted font file is not withing valid extensions.
     # Raises Error::ENOENT if the directory of inputted file is not accessible.
     def initialize(file, dir: nil, css: nil, link_to: nil)
-      [file, dir]
+      [file, dir, css, link_to]
 
       @desired_dir = dir
       @css = css
