@@ -6,6 +6,7 @@ require 'webify_ruby/version'
 require 'webify_ruby/errors'
 require 'webify_ruby/convert'
 require 'webify_ruby/css'
+require 'webify_ruby/html'
 require 'webify_ruby/tasks'
 require 'webify_ruby/railtie' if defined?(Rails)
 

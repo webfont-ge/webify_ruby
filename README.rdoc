@@ -15,6 +15,7 @@
  Version 0.0.6 :: Gagra
  Version 0.0.7 :: Sochi
  Version 0.0.8 :: Poti
+ Version 0.1.0 :: Kaspi
 
 == Usage
 
