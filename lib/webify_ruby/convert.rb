@@ -33,6 +33,8 @@ module WebifyRuby
     attr_reader :link_to
     # Public: Returns the String CSS stylesheet code if possible.
     attr_reader :styles
+    # Public: Returns the filepath of CSS file created if applicable.
+    attr_reader :css_file
 
     # Public: Initialize a Convertion of font-file.
     #
@@ -102,7 +104,7 @@ module WebifyRuby
     # Method generates Css if attribute is present and writes to a file
     # if attribute possibly is a directory.
     #
-    # Returns the Fixnum length of CSS code written or nothing.
+    # Returns the CSS filepath, code written or nothing.
     def generate_css
       needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
 
@@ -115,7 +117,7 @@ module WebifyRuby
       css = WebifyRuby::Css.new(File.basename(@file, ".*"), @file, *needs)
       @styles = css.result
 
-      css.write @css if should_write_css?
+      @css_file = css.write @css if should_write_css?
     end
 
     protected

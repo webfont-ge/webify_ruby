@@ -109,13 +109,14 @@ module WebifyRuby
     #
     # dir - The String directory path to write CSS file to.
     #
-    # Returns the Fixnum length of characters written.
+    # Returns the css file just written.
     def write(dir)
       @dir = FileUtils.mkdir_p dir
       @css_file = File.join(@dir, @filename + '.css')
 
       File.delete(@css_file) if File.exist?(@css_file)
       @output = File.open(@css_file, 'w') { |file| file.write(@result) }
+      @css_file
     end
 
     private
