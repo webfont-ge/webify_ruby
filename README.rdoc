@@ -16,6 +16,10 @@
  Version 0.0.7 :: Sochi
  Version 0.0.8 :: Poti
  Version 0.1.0 :: Kaspi
+ 
+== Generated HTML preview
+
+![HTML Preview](http://dachi-gh.github.io/webify_ruby/preview.png)
 
 == Usage
 
