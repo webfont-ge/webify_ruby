@@ -3,9 +3,7 @@ require 'fileutils'
 require 'pathname'
 
 module WebifyRuby
-  # Internal: Template which is according to what a CSS Styles
-  # will be generated. This might change in future versions,
-  # so that you will be able to pass in your own template definitions.
+  # Internal: HTML template that is used in in generated .html file.
   HTML_DOC = <<-HTML.gsub /^\s*/, ''
   <!DOCTYPE html>
   <html lang="en">
@@ -127,53 +125,28 @@ module WebifyRuby
   </html>
   HTML
 
-  # Public: Css class of the module which is to calculate paths, generate code,
-  # and write to a file if explicitely called.
-  #
-  # Examples
-  #
-  #   WebifyRuby::Css.new('name', 'example.ttf', :svg)
-  #   # => #<WebifyRuby::Css:0x007feec39a5df8>
+  # Public: Html class of the module which is to generate code,
+  # and write to the specified directory's .html file.
   class Html
-    # Public: Returns the String CSS code.
+    # Public: Returns the String file for created css stylesheet.
     attr_reader :css_file
-    # Internal: Returns the String name of the file withotut extension.
+    # Internal: Returns the String name of the directory where .html file will exist.
     attr_reader :html_dir
-    # Internal: Returns the String prefix of the font url to use in CSS stylesheet.
+    # Internal: Returns the String font name that was converted.
     attr_reader :font_name
-    # Internal: Returns the String directory path where a .css file should be created.
+    # Internal: Returns the String directory path where a .html.
     attr_reader :html_file
+    # Internal: Returns the Fixnum length of a file.
     attr_reader :output
+    # Internal: Returns the String representation of HTML file.
     attr_reader :result
 
-    # Public: Used to explicitely define options for a class to calculate what
-    # to prepend to Css font url.
-    # :relative_from should be nil if :link_to is present.
+    # Public: Initialize a HTML generation.
     #
-    # Examples
+    # css_file - A String filepath to the generated CSS.
+    # html_dir - A String path to the directory where file will be created.
     #
-    #   WebifyRuby::Css.new('test','test.ttf',:svg)
-    #   # => #<...>... src: url('test.svg#test')
-    #   #
-    #   WebifyRuby::Css.relative_from = 'lib/webify.rb'
-    #   WebifyRuby::Css.new('test','test.ttf',:svg)
-    #   # => #<...>... src: url('../../test.svg#test')
-    #   #
-    #   WebifyRuby::Css.link_to = 'http://domain.com'
-    #   WebifyRuby::Css.new('test','test.ttf',:svg)
-    #   # => #<...>... src: url('http://domain.com/test.svg#test')
-    #
-    # Both, :relative_from and :link_to should not be set
-    # :relative_from takes a preference if so.
-
-    # Public: Initialize a CSS generation / distribution.
-    #
-    # name - A String name that will be used to name a font and stylesheet file.
-    # file - A String name that will be used to link to the font files.
-    # has  - A zero or more Symbol font types that a stylesheet will use.
-    #        Valid symbols are: :eot, :svg, :woff, :ttf.
-    #
-    # Returns the String CSS stylesheet code.
+    # Returns the String HTML document code.
     def initialize(css_file, html_dir)
       @css_file = css_file
       @html_dir = html_dir
@@ -183,11 +156,9 @@ module WebifyRuby
       write
     end
 
-    # Internal: (Re-)Create a CSS file and write code there.
+    # Internal: (Re-)Create a HTML file and write code there.
     #
-    # dir - The String directory path to write CSS file to.
-    #
-    # Returns the css file just written.
+    # Returns the HTML filepath just created.
     def write
       @dir = FileUtils.mkdir_p @html_dir unless File.directory? @html_dir
       @html_file = File.join(@html_dir, @font_name + '.html')
@@ -201,7 +172,7 @@ module WebifyRuby
 
     # Public: Use template to fill placeholders with relevant values.
     #
-    # Returns the String containing a CSS stylesheet code.
+    # Returns the String containing a HTML document code.
     def make_html
       template = ERB.new HTML_DOC
       @result = template.result binding
