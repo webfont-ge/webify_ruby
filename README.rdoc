@@ -16,6 +16,7 @@
  Version 0.0.7 :: Sochi
  Version 0.0.8 :: Poti
  Version 0.1.0 :: Kaspi
+ Version 0.1.1 :: Sarpi
  
 == Generated HTML preview
 
@@ -34,7 +35,7 @@ https://github.com/dachi-gh/webify/tree/executables
 https://github.com/dachi-gh/webify
 
 ==== Add to your Gemfile
- gem 'webify_ruby', '~> 0.1.0'
+ gem 'webify_ruby', '~> 0.1.1'
 or git for development version
  gem 'webify_ruby', :git => 'git://github.com/dachi-gh/webify_ruby.git'
 

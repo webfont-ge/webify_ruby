@@ -2,20 +2,9 @@ require 'erb'
 require 'fileutils'
 require 'pathname'
 
-module WebifyRuby
-  # Public: You can set a custom HTML template by using this method.
-  def self.html_doc=(str)
-    @html_doc = str
-  end
-  
-  # Public: You can get a current HTML template that is used by the module.
-  def self.html_doc
-    return @html_doc if @html_doc
-    @html_doc = WebifyRuby::html_doc_default
-  end
-  
+module WebifyRuby  
   # Internal: HTML template that is used in in generated .html file by default.
-  html_doc_default = <<-HTML.gsub /^\s*/, ''
+  HTML_DOC_DEFAULT = <<-HTML.gsub /^\s*/, ''
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -136,6 +125,17 @@ module WebifyRuby
   </html>
   HTML
 
+  # Public: You can set a custom HTML template by using this method.
+  def self.html_doc=(str)
+    @html_doc = str
+  end
+  
+  # Public: You can get a current HTML template that is used by the module.
+  def self.html_doc
+    return @html_doc if @html_doc
+    @html_doc = WebifyRuby::HTML_DOC_DEFAULT
+  end
+  
   # Public: Html class of the module which is to generate code,
   # and write to the specified directory's .html file.
   class Html
