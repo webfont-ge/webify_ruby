@@ -45,17 +45,19 @@ module WebifyRuby
     #            If value is set to true, then a stylesheet file won't be created,
     #            but code will become accessible as :styles attribute (optional).
     # :link_to - A String notation indicating how to prefix a font url in CSS (optional).
+    # :unique_id - A custom identifier which will separate different fonts (optional).
     #
     # Returns nothing.
     # Raises Errno::ENOENT if the inputted file cannot be found.
     # Raises Error if the inputted font file is not withing valid extensions.
     # Raises Error::ENOENT if the directory of inputted file is not accessible.
-    def initialize(file, dir: nil, css: nil, link_to: nil)
-      [file, dir, css, link_to]
+    def initialize(file, dir: nil, css: nil, link_to: nil, unique_id: nil)
+      [file, dir, css, link_to, unique_id]
 
       @desired_dir = dir
       @css = css
       @link_to = link_to
+      @unique_id = unique_id
 
       raise Errno::ENOENT, "The font file '#{file}' does not exist" unless File.exists?(file)
       @original_file = file
@@ -66,6 +68,12 @@ module WebifyRuby
       raise Errno::ENOENT, "Can't find directory '#{@original_dir}'" unless File.directory? @original_dir
 
       @result_dir = Dir.mktmpdir(nil, destination_dir)
+      
+      unless @unique_id.nil?
+        custom_dir = File.join(File.expand_path('..', @result_dir), @unique_id)
+        FileUtils.mv @result_dir, custom_dir
+        @result_dir = custom_dir
+      end
 
       FileUtils.cp(@original_file, @result_dir)
 

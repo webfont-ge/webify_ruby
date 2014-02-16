@@ -13,6 +13,7 @@
  Version 0.0.4 :: Kolxi
  Version 0.0.5 :: Racha
  Version 0.0.6 :: Gagra
+ Version 0.0.7 :: Sochi
 
 == Usage
 
@@ -27,7 +28,7 @@ https://github.com/dachi-gh/webify/tree/executables
 https://github.com/dachi-gh/webify
 
 ==== Add to your Gemfile
- gem 'webify_ruby', '~> 0.0.6'
+ gem 'webify_ruby', '~> 0.0.7'
 or git for development version
  gem 'webify_ruby', :git => 'git://github.com/dachi-gh/webify_ruby.git'
 
