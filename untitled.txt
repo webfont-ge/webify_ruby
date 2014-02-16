@@ -1,26 +1,12 @@
-require 'erb'
-require 'fileutils'
-require 'pathname'
-
-module WebifyRuby
-  # Public: You can set a custom HTML template by using this method.
-  def self.html_doc=(str)
-    @html_doc = str
-  end
-  
-  # Public: You can get a current HTML template that is used by the module.
-  def self.html_doc
-    return @html_doc if @html_doc
-    @html_doc = WebifyRuby::html_doc_default
-  end
-  
-  # Internal: HTML template that is used in in generated .html file by default.
-  html_doc_default = <<-HTML.gsub /^\s*/, ''
+ a = WebifyRuby::Convert.new('../../Desktop/bpg_dedaena_nonblock.ttf', dir:'../../Desktop', css:'../../Desktop/dachi', link_to:nil, unique_id:'dachi', :html => '../../Desktop/dachi')
+ 
+ 
+  WebifyRuby::html_doc = <<-HTML.gsub /^\s*/, ''
   <!DOCTYPE html>
   <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title><%=@font_name%> - WebifyRuby</title>
+    <title>OVERRIDDEN</title>
     <link rel="stylesheet" type="text/css" href="<%=@css_file%>">
     <style>
     ::-moz-selection {
@@ -135,58 +121,3 @@ module WebifyRuby
   </body>
   </html>
   HTML
-
-  # Public: Html class of the module which is to generate code,
-  # and write to the specified directory's .html file.
-  class Html
-    # Public: Returns the String file for created css stylesheet.
-    attr_reader :css_file
-    # Internal: Returns the String name of the directory where .html file will exist.
-    attr_reader :html_dir
-    # Internal: Returns the String font name that was converted.
-    attr_reader :font_name
-    # Internal: Returns the String directory path where a .html.
-    attr_reader :html_file
-    # Internal: Returns the Fixnum length of a file.
-    attr_reader :output
-    # Internal: Returns the String representation of HTML file.
-    attr_reader :result
-
-    # Public: Initialize a HTML generation.
-    #
-    # css_file - A String filepath to the generated CSS.
-    # html_dir - A String path to the directory where file will be created.
-    #
-    # Returns the String HTML document code.
-    def initialize(css_file, html_dir)
-      @css_file = css_file
-      @html_dir = html_dir
-      @font_name = File.basename(@css_file, ".*")
-
-      make_html
-      write
-    end
-
-    # Internal: (Re-)Create a HTML file and write code there.
-    #
-    # Returns the HTML filepath just created.
-    def write
-      @dir = FileUtils.mkdir_p @html_dir unless File.directory? @html_dir
-      @html_file = File.join(@html_dir, @font_name + '.html')
-
-      File.delete(@html_file) if File.exist?(@html_file)
-      @output = File.open(@html_file, 'w') { |file| file.write(@result) }
-      @html_file
-    end
-
-    private
-
-    # Public: Use template to fill placeholders with relevant values.
-    #
-    # Returns the String containing a HTML document code.
-    def make_html
-      template = ERB.new WebifyRuby::html_doc
-      @result = template.result binding
-    end
-  end
-end
