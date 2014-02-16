@@ -106,11 +106,12 @@ module WebifyRuby
     def generate_css
       needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
 
+      WebifyRuby::Css.link_to = @link_to
+    
       if should_write_css?
         WebifyRuby::Css.relative_from = @link_to ? nil : @css
-        WebifyRuby::Css.link_to = @link_to
       end
-
+        
       css = WebifyRuby::Css.new(File.basename(@file, ".*"), @file, *needs)
       @styles = css.result
 
