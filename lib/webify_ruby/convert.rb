@@ -72,6 +72,7 @@ module WebifyRuby
       unless @unique_id.nil?
         custom_dir = File.join(File.expand_path('..', @result_dir), @unique_id)
         FileUtils.mv @result_dir, custom_dir
+        FileUtils.rm_rf File.join(custom_dir, File.basename(@result_dir))
         @result_dir = custom_dir
       end
 

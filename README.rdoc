@@ -14,6 +14,7 @@
  Version 0.0.5 :: Racha
  Version 0.0.6 :: Gagra
  Version 0.0.7 :: Sochi
+ Version 0.0.8 :: Poti
 
 == Usage
 
