@@ -7,16 +7,7 @@
 
 = WebifyRuby - Haskell Webify bindings gem for Ruby and Rails Applications
 
- Version 0.0.1 :: Lazi
- Version 0.0.2 :: Gali
- Version 0.0.3 :: Vani
- Version 0.0.4 :: Kolxi
- Version 0.0.5 :: Racha
- Version 0.0.6 :: Gagra
- Version 0.0.7 :: Sochi
- Version 0.0.8 :: Poti
- Version 0.1.0 :: Kaspi
- Version 0.1.1 :: Sarpi
+ Latest version: 0.1.2
  
 == Generated HTML preview
 
@@ -35,7 +26,7 @@ https://github.com/dachi-gh/webify/tree/executables
 https://github.com/dachi-gh/webify
 
 ==== Add to your Gemfile
- gem 'webify_ruby', '~> 0.1.1'
+ gem 'webify_ruby', '~> 0.1.2'
 or git for development version
  gem 'webify_ruby', :git => 'git://github.com/dachi-gh/webify_ruby.git'
 

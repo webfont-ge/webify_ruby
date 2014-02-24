@@ -35,32 +35,38 @@ module WebifyRuby
     attr_reader :styles
     # Public: Returns the filepath of CSS file created if applicable.
     attr_reader :css_file
+    # Public: Returns the html_file that bas been createde
+    attr_reader :html_file
+    # Public: Returns the value of custom css file link
+    attr_reader :link_to_css
 
     # Public: Initialize a Convertion of font-file.
     #
-    # file       - A String containing relative or full path of file to convert.
-    # :dir       - A String indicating to the desired to save converted files (optional).
-    # :css       - A String or Boolean value indicating a desired CSS behavior.
-    #              If present, it can be either directory path in String or Boolean.
-    #              If value is set to true, then a stylesheet file won't be created,
-    #              but code will become accessible as :styles attribute (optional).
-    # :link_to   - A String notation indicating how to prefix a font url in CSS (optional).
-    # :unique_id - A custom identifier which will separate different fonts (optional).
-    # :html      - If present, it will create an HTML file in the given directory.
-    #              Note: CSS has to be set to generate a file too. (optional).
+    # file         - A String containing relative or full path of file to convert.
+    # :dir         - A String indicating to the desired to save converted files (optional).
+    # :css         - A String or Boolean value indicating a desired CSS behavior.
+    #                If present, it can be either directory path in String or Boolean.
+    #                If value is set to true, then a stylesheet file won't be created,
+    #                but code will become accessible as :styles attribute (optional).
+    # :link_to     - A String notation indicating how to prefix a font url in CSS (optional).
+    # :unique_id   - A custom identifier which will separate different fonts (optional).
+    # :html        - If present, it will create an HTML file in the given directory.
+    #                Note: CSS has to be set to generate a file too. (optional).
+    # :link_to_css - Css file to link to. (optional).
     #
     # Returns nothing.
     # Raises Errno::ENOENT if the inputted file cannot be found.
     # Raises Error if the inputted font file is not withing valid extensions.
     # Raises Error::ENOENT if the directory of inputted file is not accessible.
-    def initialize(file, dir: nil, css: nil, link_to: nil, unique_id: nil, html: nil)
-      [file, dir, css, link_to, unique_id, html]
+    def initialize(file, dir: nil, css: nil, link_to: nil, unique_id: nil, html: nil, link_to_css: nil)
+      [file, dir, css, link_to, unique_id, html, link_to_css]
 
       @desired_dir = dir
       @css = css
       @link_to = link_to
       @unique_id = unique_id
       @html = html
+      @link_to_css = link_to_css
 
       raise Errno::ENOENT, "The font file '#{file}' does not exist" unless File.exists?(file)
       @original_file = file
@@ -141,8 +147,10 @@ module WebifyRuby
     def generate_html
       return false if @css_file.nil? or @html.nil?
       
-      html = WebifyRuby::Html.new(@css_file, @html)
-      @html_file = html.result
+      css_link = @link_to_css.nil? ? @css_file : @link_to_css
+      
+      html = WebifyRuby::Html.new(css_link, @html)
+      @html_file = html.html_file
     end
 
     protected
