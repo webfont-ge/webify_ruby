@@ -1,5 +1,5 @@
 {<img src="https://coveralls.io/repos/dachi-gh/webify_ruby/badge.png?branch=master" alt="Coverage Status" />}[https://coveralls.io/r/dachi-gh/webify_ruby?branch=master]
-{<img src="https://travis-ci.org/webfont-ge/webify_ruby.png?branch=master" alt="Build Status" />}[https://travis-ci.org/dachi-gh/webify_ruby]
+{<img src="https://travis-ci.org/webfont-ge/webify_ruby.png?branch=master" alt="Build Status" />}[https://travis-ci.org/webfont-ge/webify_ruby]
 {<img src="https://gemnasium.com/dachi-gh/webify_ruby.png" alt="Dependency Status" />}[https://gemnasium.com/dachi-gh/webify_ruby]
 {<img src="https://badge.fury.io/rb/webify_ruby.png" alt="Gem Version" />}[http://badge.fury.io/rb/webify_ruby]
 {<img src="https://codeclimate.com/github/dachi-gh/webify_ruby.png" />}[https://codeclimate.com/github/dachi-gh/webify_ruby]
