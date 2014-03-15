@@ -126,6 +126,9 @@ module WebifyRuby
     # Returns the CSS filepath, code written or nothing.
     def generate_css
       needs = affected_files.map { |m| File.extname(m)[1..-1].to_sym }
+      
+      original_ext = File.extname(@original_file)[1..-1]
+      needs << original_ext.to_sym unless needs.include? original_ext
 
       WebifyRuby::Css.link_to = @link_to
     
